@@ -1,0 +1,8 @@
+{
+  "name": "petfeeder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:palexandremello/petfeeder-backend-go.git",
+  "author": "Paulo Alexandre Mello <palexandremello@gmail.com>",
+  "license": "MIT"
+}
