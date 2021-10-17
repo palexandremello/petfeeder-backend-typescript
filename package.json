@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:palexandremello/petfeeder-backend-go.git",
   "author": "Paulo Alexandre Mello <palexandremello@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.2.8"
+  }
 }
