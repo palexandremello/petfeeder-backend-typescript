@@ -2,7 +2,7 @@ export default {
   roots: ['<rootDir>/src'],
   collectCoverage: true,
 
-  collectCoverageForm: ['<rootDir>/src/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 
   coverageDirectory: 'coverage',
 
