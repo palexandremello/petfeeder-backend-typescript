@@ -5,9 +5,12 @@
   "repository": "git@github.com:palexandremello/petfeeder-backend-go.git",
   "author": "Paulo Alexandre Mello <palexandremello@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint 'src/**.ts' --fix"
+  },
   "lint-staged": {
     "src/**/*": [
-      "eslint 'src/**' --fix",
+      "yarn lint",
       "git add"
     ]
   },
@@ -19,7 +22,7 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "git-commit-msg-linter": "^3.2.8",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",

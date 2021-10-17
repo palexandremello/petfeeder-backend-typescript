@@ -1,18 +1,9 @@
-import express from 'express';
+import express from 'express'
 
-const app = express();
+const app = express()
 
-app.get('/', (request, response) => response.json({ message: 'teste' }));
-app.get('/post', (request, response) => {
-  const { a, b } = request.body;
-});
+app.get('/', (request, response) =>
+  response.json({ message: 'mensagem muito maior vamos ver o que rola' })
+)
 
-app.get('/post', (request, response) => {
-  const { a, b } = request.body;
-});
-
-app.get('/post', (request, response) => {
-  const { a, b } = request.body;
-});
-
-app.listen(3333, () => console.log('teste carai'));
+app.listen(3333, () => console.log('teste carai'))
