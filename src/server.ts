@@ -7,4 +7,12 @@ app.get('/post', (request, response) => {
   const { a, b } = request.body;
 });
 
+app.get('/post', (request, response) => {
+  const { a, b } = request.body;
+});
+
+app.get('/post', (request, response) => {
+  const { a, b } = request.body;
+});
+
 app.listen(3333, () => console.log('teste carai'));
