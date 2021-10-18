@@ -39,7 +39,7 @@ describe('SignUp Controller', () => {
     expect(httpReponse.statusCode).toBe(400)
     expect(httpReponse.body).toEqual(new MissingParamError('first_name'))
   }),
-    test('{Should return 400 if no last_name is provided', () => {
+    test('Should return 400 if no last_name is provided', () => {
       const { sut } = makeSut()
       const httpRequest = {
         body: {
