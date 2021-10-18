@@ -6,9 +6,9 @@
   "author": "Paulo Alexandre Mello <palexandremello@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint 'src/**.ts' --fix",
-    "test": "jest",
-    "test:staged": "jest"
+    "lint": "eslint 'src/**/*.ts' --fix",
+    "test": "jest --passWithNoTests",
+    "test:staged": "jest --passWithNoTests"
   },
   "lint-staged": {
     "src/**/*": [
