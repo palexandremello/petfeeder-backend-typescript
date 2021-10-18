@@ -1,3 +1,4 @@
+import { MissingParamError } from '../errors/missing-param-error'
 import SignUpController from './signup'
 describe('SignUp Controller', () => {
   test('Should return 400 if no first_name is provided', () => {
@@ -15,7 +16,7 @@ describe('SignUp Controller', () => {
     const httpReponse = sut.handle(httpRequest)
 
     expect(httpReponse.statusCode).toBe(400)
-    expect(httpReponse.body).toEqual(new Error('Missing param: name'))
+    expect(httpReponse.body).toEqual(new MissingParamError('first_name'))
   }),
     test('Should return 400 if no last_name is provided', () => {
       const sut = new SignUpController()
@@ -32,7 +33,7 @@ describe('SignUp Controller', () => {
       const httpReponse = sut.handle(httpRequest)
 
       expect(httpReponse.statusCode).toBe(400)
-      expect(httpReponse.body).toEqual(new Error('Missing param: last_name'))
+      expect(httpReponse.body).toEqual(new MissingParamError('last_name'))
     }),
     test('Should return 400 if no email is provided', () => {
       const sut = new SignUpController()
@@ -49,6 +50,6 @@ describe('SignUp Controller', () => {
       const httpReponse = sut.handle(httpRequest)
 
       expect(httpReponse.statusCode).toBe(400)
-      expect(httpReponse.body).toEqual(new Error('Missing param: email'))
+      expect(httpReponse.body).toEqual(new MissingParamError('email'))
     })
 })
