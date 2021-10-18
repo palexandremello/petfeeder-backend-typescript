@@ -10,6 +10,7 @@ class SignUpController {
       'email',
       'birthday',
       'sex',
+      'password',
     ]
 
     for (const field of requiredFields) {
