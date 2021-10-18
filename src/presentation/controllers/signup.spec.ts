@@ -51,5 +51,39 @@ describe('SignUp Controller', () => {
 
       expect(httpReponse.statusCode).toBe(400)
       expect(httpReponse.body).toEqual(new MissingParamError('email'))
+    }),
+    test('Should return 400 if no birthday is provided', () => {
+      const sut = new SignUpController()
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          password: '147258',
+          passwordConfirmation: '147258',
+          sex: 'M',
+        },
+      }
+      const httpReponse = sut.handle(httpRequest)
+
+      expect(httpReponse.statusCode).toBe(400)
+      expect(httpReponse.body).toEqual(new MissingParamError('birthday'))
+    }),
+    test('Should return 400 if no sex is provided', () => {
+      const sut = new SignUpController()
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          password: '147258',
+          passwordConfirmation: '147258',
+          birthday: '08/10/1994',
+        },
+      }
+      const httpReponse = sut.handle(httpRequest)
+
+      expect(httpReponse.statusCode).toBe(400)
+      expect(httpReponse.body).toEqual(new MissingParamError('sex'))
     })
 })
