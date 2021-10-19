@@ -157,6 +157,81 @@ describe('SignUp Controller', () => {
         new MissingParamError('passwordConfirmation')
       )
     }),
+    test('Should return 400 if an invalid password is provided', () => {
+      const { sut } = makeSut()
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          passwordConfirmation: '147258',
+          birthday: '08/10/1994',
+          sex: 'M',
+        },
+      }
+      const httpReponse = sut.handle(httpRequest)
+
+      expect(httpReponse.statusCode).toBe(400)
+      expect(httpReponse.body).toEqual(new InvalidParamError('password'))
+    }),
+    test('Should return 400 if an invalid passwordConfirmation is provided', () => {
+      const { sut } = makeSut()
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          password: '147258',
+          birthday: '08/10/1994',
+          sex: 'M',
+        },
+      }
+      const httpReponse = sut.handle(httpRequest)
+
+      expect(httpReponse.statusCode).toBe(400)
+      expect(httpReponse.body).toEqual(
+        new InvalidParamError('passwordConfirmation')
+      )
+    }),
+    test('Should return 400 if passwordConfirmation is differente than password', () => {
+      const { sut } = makeSut()
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          password: '147258',
+          passwordConfirmation: 'invalid',
+          birthday: '08/10/1994',
+          sex: 'M',
+        },
+      }
+      const httpReponse = sut.handle(httpRequest)
+
+      expect(httpReponse.statusCode).toBe(400)
+      expect(httpReponse.body).toEqual(
+        new InvalidParamError('passwordConfirmation')
+      )
+    }),
+    test('Should return 400 if an invalid email is provided', () => {
+      const { sut, emailValidatorStub } = makeSut()
+      jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'teste_email@mail.com',
+          password: '147258',
+          passwordConfirmation: '147258',
+          birthday: '08/10/1994',
+          sex: 'M',
+        },
+      }
+      const httpReponse = sut.handle(httpRequest)
+
+      expect(httpReponse.statusCode).toBe(400)
+      expect(httpReponse.body).toEqual(new InvalidParamError('email'))
+    }),
     test('Should return 400 if an invalid email is provided', () => {
       const { sut, emailValidatorStub } = makeSut()
       jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
