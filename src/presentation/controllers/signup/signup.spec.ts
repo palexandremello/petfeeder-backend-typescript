@@ -23,7 +23,7 @@ const makeAddAccount = (): AddAccount => {
         id: '123',
         first_name: 'Paulo Alexandre',
         last_name: 'Mello',
-        email: 'teste_email@mail.com',
+        email: 'palexandremello@gmail.com',
         password: '147258',
         birthday: '08/10/1994',
         sex: 'M',
@@ -353,5 +353,31 @@ describe('SignUp Controller', () => {
 
       expect(httpResponse.statusCode).toBe(500)
       expect(httpResponse.body).toEqual(new ServerError())
+    }),
+    test('Should return 200 if valida data is provided', () => {
+      const { sut } = makeSut()
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          password: '147258',
+          passwordConfirmation: '147258',
+          birthday: '08/10/1994',
+          sex: 'M',
+        },
+      }
+      const httpResponse = sut.handle(httpRequest)
+
+      expect(httpResponse.statusCode).toBe(200)
+      expect(httpResponse.body).toEqual({
+        id: '123',
+        first_name: 'Paulo Alexandre',
+        last_name: 'Mello',
+        email: 'palexandremello@gmail.com',
+        password: '147258',
+        birthday: '08/10/1994',
+        sex: 'M',
+      })
     })
 })
