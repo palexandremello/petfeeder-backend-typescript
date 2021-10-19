@@ -330,5 +330,28 @@ describe('SignUp Controller', () => {
         birthday: '08/10/1994',
         sex: 'M',
       })
+    }),
+    test('Should return 500 if AddAccount throws', () => {
+      const { sut, addAccountStub } = makeSut()
+      const addSpy = jest
+        .spyOn(addAccountStub, 'add')
+        .mockImplementationOnce(() => {
+          throw new Error()
+        })
+      const httpRequest = {
+        body: {
+          first_name: 'Paulo Alexandre',
+          last_name: 'Mello',
+          email: 'palexandremello@gmail.com',
+          password: '147258',
+          passwordConfirmation: '147258',
+          birthday: '08/10/1994',
+          sex: 'M',
+        },
+      }
+      const httpResponse = sut.handle(httpRequest)
+
+      expect(httpResponse.statusCode).toBe(500)
+      expect(httpResponse.body).toEqual(new ServerError())
     })
 })
