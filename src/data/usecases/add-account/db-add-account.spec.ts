@@ -1,9 +1,27 @@
 import { DbAddAccount } from './db-add-account'
-import { Encrypter } from './db-add-account-protocols'
+import {
+  AccountModel,
+  AddAccountModel,
+  AddAccountRepository,
+  Encrypter,
+} from './db-add-account-protocols'
 
-interface SutTypes {
-  sut: DbAddAccount
-  encrypterStub: Encrypter
+const makeAddAccountRepository = (): AddAccountRepository => {
+  class AddAccountRepositoryStub implements AddAccountRepository {
+    async add(accountData: AddAccountModel): Promise<AccountModel> {
+      const fakeAccount = {
+        id: 'valid_id',
+        first_name: 'Paulo Alexandre',
+        last_name: 'Mello',
+        email: 'palexandremello@gmail.com',
+        password: 'hashed_password',
+        birthday: '08/10/1994',
+        sex: 'M',
+      }
+      return new Promise((resolve) => resolve(fakeAccount))
+    }
+  }
+  return new AddAccountRepositoryStub()
 }
 
 const makeEncrypter = (): Encrypter => {
@@ -14,13 +32,22 @@ const makeEncrypter = (): Encrypter => {
   }
   return new EncrypterStub()
 }
+
+interface SutTypes {
+  sut: DbAddAccount
+  encrypterStub: Encrypter
+  addAccountRepositoryStub: AddAccountRepository
+}
+
 const makeSut = (): SutTypes => {
   const encrypterStub = makeEncrypter()
-  const sut = new DbAddAccount(encrypterStub)
+  const addAccountRepositoryStub = makeAddAccountRepository()
+  const sut = new DbAddAccount(encrypterStub, addAccountRepositoryStub)
 
   return {
     sut,
     encrypterStub,
+    addAccountRepositoryStub,
   }
 }
 describe('DbAddAccount  Usecase', () => {
@@ -55,5 +82,26 @@ describe('DbAddAccount  Usecase', () => {
       }
       const promise = sut.add(accountData)
       await expect(promise).rejects.toThrow()
+    }),
+    test('Should call encrypter with correct password', async () => {
+      const { sut, addAccountRepositoryStub } = makeSut()
+      const addSpy = jest.spyOn(addAccountRepositoryStub, 'add')
+      const accountData = {
+        first_name: 'Paulo Alexandre',
+        last_name: 'Mello',
+        email: 'palexandremello@gmail.com',
+        password: 'valid_password',
+        birthday: '08/10/1994',
+        sex: 'M',
+      }
+      await sut.add(accountData)
+      expect(addSpy).toHaveBeenCalledWith({
+        first_name: 'Paulo Alexandre',
+        last_name: 'Mello',
+        email: 'palexandremello@gmail.com',
+        password: 'hashed_password',
+        birthday: '08/10/1994',
+        sex: 'M',
+      })
     })
 })
