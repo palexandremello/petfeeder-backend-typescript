@@ -103,5 +103,23 @@ describe('DbAddAccount  Usecase', () => {
         birthday: '08/10/1994',
         sex: 'M',
       })
+    }),
+    test('Should throw if AddAccountRepository throws', async () => {
+      const { sut, addAccountRepositoryStub } = makeSut()
+      jest
+        .spyOn(addAccountRepositoryStub, 'add')
+        .mockReturnValueOnce(
+          new Promise((resolve, reject) => reject(new Error()))
+        )
+      const accountData = {
+        first_name: 'Paulo Alexandre',
+        last_name: 'Mello',
+        email: 'palexandremello@gmail.com',
+        password: 'valid_password',
+        birthday: '08/10/1994',
+        sex: 'M',
+      }
+      const promise = sut.add(accountData)
+      await expect(promise).rejects.toThrow()
     })
 })
