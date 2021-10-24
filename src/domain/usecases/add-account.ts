@@ -7,7 +7,6 @@ export interface AddAccountModel {
   password: string
   birthday: string
   sex: string
-  pet?: []
 }
 
 export interface AddAccount {

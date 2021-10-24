@@ -1,8 +1,7 @@
 import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helpers'
-import PostgresHelper from '../infra/db/postgresql/helpers/postgres-helpers'
 import env from './config/env'
 
-PostgresHelper.create()
+MongoHelper.connect(env.mongoUrl)
   .then(async () => {
     const app = (await import('./config/app')).default
     app.listen(env.port, () => {

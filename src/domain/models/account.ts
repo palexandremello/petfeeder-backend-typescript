@@ -6,5 +6,4 @@ export interface AccountModel {
   password: string
   birthday: string
   sex: string
-  pet?: []
 }
