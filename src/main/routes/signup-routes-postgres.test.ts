@@ -5,10 +5,11 @@ import app from '../config/app'
 
 describe('SignUp Routes', () => {
   beforeAll(async () => {
-    await PostgresHelper.create()
+    await PostgresHelper.create(true)
   })
 
   afterAll(async () => {
+    await PostgresHelper.clear()
     await PostgresHelper.close()
   })
 

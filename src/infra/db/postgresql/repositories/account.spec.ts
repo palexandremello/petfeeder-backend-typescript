@@ -3,7 +3,7 @@ import { AccountPostgresRepository } from './account'
 
 describe('Account PostgreSQL Repository ', () => {
   beforeAll(async () => {
-    await PostgresHelper.create()
+    await PostgresHelper.create(true)
   })
 
   afterAll(async () => {

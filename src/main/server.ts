@@ -1,5 +1,3 @@
-import 'reflect-metadata'
-
 import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helpers'
 import PostgresHelper from '../infra/db/postgresql/helpers/postgres-helpers'
 import env from './config/env'
