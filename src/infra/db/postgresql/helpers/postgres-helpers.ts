@@ -13,10 +13,12 @@ const PostgresHelper = {
     const connection = getConnection()
     const entities = connection.entityMetadatas
 
-    entities.forEach(async (entity) => {
-      const repository = connection.getRepository(entity.name)
-      await repository.query(`DELETE FROM ${entity.tableName}`)
-    })
+    await Promise.all(
+      entities.map(async (entity) => {
+        const repository = connection.getRepository(entity.name)
+        await repository.query(`DELETE FROM ${entity.tableName};`)
+      })
+    )
   },
 }
 

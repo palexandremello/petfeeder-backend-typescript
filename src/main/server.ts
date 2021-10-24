@@ -1,7 +1,10 @@
+import 'reflect-metadata'
+
 import { MongoHelper } from '../infra/db/mongodb/helpers/mongo-helpers'
+import PostgresHelper from '../infra/db/postgresql/helpers/postgres-helpers'
 import env from './config/env'
 
-MongoHelper.connect(env.mongoUrl)
+PostgresHelper.create()
   .then(async () => {
     const app = (await import('./config/app')).default
     app.listen(env.port, () => {

@@ -23,7 +23,10 @@ class AccountEntity {
   @Column({ unique: true })
   email: string
 
-  @OneToMany((type) => PetEntity, (pet) => pet.account, { eager: true })
+  @OneToMany((type) => PetEntity, (pet) => pet.account, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
   pets: PetEntity[]
 
   @CreateDateColumn({ name: 'created_at' })

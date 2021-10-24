@@ -7,11 +7,8 @@ describe('Account PostgreSQL Repository ', () => {
   })
 
   afterAll(async () => {
-    await PostgresHelper.close()
-  })
-
-  beforeEach(async () => {
     await PostgresHelper.clear()
+    await PostgresHelper.close()
   })
 
   test('Should return an account on success ', async () => {

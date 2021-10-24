@@ -18,7 +18,9 @@ class PetEntity {
   @Column()
   name: string
 
-  @ManyToOne(() => AccountEntity, (account) => account.pets)
+  @ManyToOne(() => AccountEntity, (account) => account.pets, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'account_id' })
   account: AccountEntity
 
