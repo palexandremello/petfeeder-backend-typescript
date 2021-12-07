@@ -7,7 +7,14 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/main/api",
-    "build": "rimraf dist ** yarn tsc -p tsconfig-build.json"
+    "build": "rimraf dist && yarn tsc -p tsconfig-build.json",
+    "lint": "eslint .",
+    "lint:fix": "yarn lint -- --fix",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "yarn test --watch",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:coverage": "yarn test --coverage",
+    "prepare": "husky install"
   },
   "engines": {
     "node": "17.x"
