@@ -1,0 +1,19 @@
+{
+  "name": "petfeeder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:palexandremello/petfeeder-backend-go.git",
+  "author": "Paulo Alexandre Mello <palexandremello@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/main/api",
+    "build": "rimraf dist ** yarn tsc -p tsconfig-build.json"
+  },
+  "engines": {
+    "node": "17.x"
+  },
+  "devDependencies": {
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "typescript": "^4.5.2"
+  }
+}
